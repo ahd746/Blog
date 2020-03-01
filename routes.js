@@ -5,6 +5,9 @@ require('./controllers/postsController');
 // Routes
 routes.get('/', indexController)
 
+
+routes.get('/about',(req,res)=>res.send('Hello from about page'))
+
 routes.get('/create', createController)
 
 routes.get('/:id', showController)
