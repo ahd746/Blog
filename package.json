@@ -4,7 +4,7 @@
   "description": "",
   "main": "server",
   "scripts": {
-    "start": "npm install && node server"
+    "start": "node server.js"
   },
   "author": "Ahmed Salama",
   "license": "ISC",

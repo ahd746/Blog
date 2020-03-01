@@ -3,7 +3,7 @@ const routes = express.Router();
 require('./controllers/postsController');
 
 // Routes
-routes.get('/', indexController)
+routes.get('/home', indexController)
 
 routes.get('/create', createController)
 
