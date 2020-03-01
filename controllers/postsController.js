@@ -2,7 +2,6 @@ const Posts = require('../models/posts');
 
 indexController = (req, res) => {
     Posts.find({}, (error, result) => {
-
         res.render('index', { items: result });
     })
 
