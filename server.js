@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: false }))
 //mongoose
 const mongoose = require('mongoose');
 mongoose
-    .connect('mongodb+srv://ahd746:4FeEYZSRoTdg4uuQ@todo-kaloi.mongodb.net/test', { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect('mongodb+srv://ahd746:4FeEYZSRoTdg4uuQ@todo-kaloi.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to Mongo DB ..'))
     .catch((error) => console.log(error));
 
