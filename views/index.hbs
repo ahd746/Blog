@@ -1,0 +1,24 @@
+<div class="row my-2">
+    {{#each items}}
+    <div class="col-md-6">
+        <div
+            class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative rounded">
+            <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-primary">By: {{this.author}}</strong>
+                <h3 class="mb-0">{{this.title}}</h3>
+                <div class="mb-1 text-muted">{{this.date}}</div>
+                <p class="card-tex  t mb-auto text-truncate">{{this.body}}</p>
+                <a href="/{{this._id}}">Continue reading</a>
+                <div class="mt-3">
+                    <a href="/edit/{{this._id}}" class="badge badge-success w-25">Edit</a>
+                    <a href="/delete/{{this._id}}" class="badge badge-danger w-25">Delete</a>
+                </div>
+            </div>
+            <div class="col-auto d-none d-lg-block">
+            </div>
+        </div>
+
+    </div>
+
+    {{/each}}
+</div>
