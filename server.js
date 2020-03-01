@@ -18,6 +18,16 @@ const exphbs = require('express-handlebars');
 app.engine('.hbs', exphbs({ extname: '.hbs' }));
 app.set('view engine', '.hbs');
 
+
+//erpress session
+var session = require('express-session');
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false,
+}))
+
+
 //routes
 const routes = require('./routes');
 app.use('/', routes);

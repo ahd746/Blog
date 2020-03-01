@@ -2,9 +2,10 @@ const Posts = require('../models/posts');
 
 indexController = (req, res) => {
     Posts.find({}, (error, result) => {
-        res.render('index', { items: result });
+        res.render('index', { items: result, msg: req.session.msg, type: req.session.type });
+        req.session.destroy();
+        
     })
-
 };
 
 
@@ -29,6 +30,8 @@ insertController = (req, res) => {
         body: req.body.body
     });
     thepost.save();
+    req.session.msg = 'Post created successfully';
+    req.session.type='success'
     res.redirect('/');
 };
 
@@ -47,15 +50,17 @@ updateController = (req, res) => {
         body: req.body.body
     };
     Posts.updateOne({ _id: req.params.id }, { $set: updatedPost }, (error) => { })
+    req.session.msg = 'Post updated successfully';
+    req.session.type='success'
     res.redirect('/');
 };
 
 
 deleteController = (req, res) => {
-    console.log(req.params.id);
     Posts.deleteOne({ _id: req.params.id }, (error, result) => { });
+    req.session.msg = 'Post deleted successfully';
+    req.session.type='success'
     res.redirect('/');
-
 };
 
 module.exports = { indexController, showController, createController, insertController, editController, updateController, deleteController };
