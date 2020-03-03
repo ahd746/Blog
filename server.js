@@ -19,18 +19,29 @@ app.engine('.hbs', exphbs({ extname: '.hbs' }));
 app.set('view engine', '.hbs');
 
 
-//erpress session
+//express session
 var session = require('express-session');
 app.use(session({
     secret: 'keyboard cat',
-    resave: false,
+    resave: true,
     saveUninitialized: false,
 }))
 
+//*express flash
+var flash = require('express-flash')
+app.use(flash());
+
+//passport
+const passport = require('passport')
+app.use(passport.initialize());
+app.use(passport.session());
+require('./passport');
 
 //routes
-const routes = require('./routes');
-app.use('/', routes);
+const mainRoutes = require('./routes/mainRoutes');
+const userRoutes = require('./routes/userRoutes');
+app.use('/', mainRoutes);
+app.use('/user', userRoutes);
 
 //Set the port and listen 
 PORT = process.env.PORT || 5000;
