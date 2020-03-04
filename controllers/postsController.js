@@ -2,9 +2,9 @@ const Posts = require('../models/posts');
 
 isSign = (req, res) => {
     if (req.isAuthenticated()) {
-        sign=true;
+        sign = true;
     } else {
-        sign=false;
+        sign = false;
     };
 }
 
@@ -34,7 +34,11 @@ showController = (req, res) => {
 
 createController = (req, res) => {
     isSign(req, res);
-    res.render('create', { sign });
+    if (sign) {
+        res.render('create', { sign });
+    }else{
+        res.redirect('sign-in')
+    }
 };
 
 
