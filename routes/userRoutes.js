@@ -1,6 +1,7 @@
 const express = require('express');
 const routes = express.Router();
 require('../controllers/userController');
+const Posts = require('../models/posts');
 
 const { check, validationResult } = require('express-validator');
 const passport = require('passport');
@@ -28,7 +29,7 @@ routes.post('/sign-in', [
     }
     next();
 }, passport.authenticate('local-sign-in', {
-    successRedirect: '/',
+    successRedirect: '/user/profile',
     failureRedirect: 'sign-in',
     failureFlash: true
 
@@ -62,21 +63,27 @@ routes.post('/sign-up', [
     next();
 }, passport.authenticate('local-sign-up', {
     session: false,
-    successRedirect: '/',
+    successRedirect: '/user/profile',
     failureRedirect: 'sign-up',
     failureFlash: true
 
 }))
 
 
-
-
-
-routes.get('/profile', (req, res) => {
-    res.render('profile')
+routes.get('/profile', isSignIn, (req, res) => {
+    Posts.find({author :req.user.userName}, (error, result) => {
+        res.render('profile', {
+            items: result,
+            msg: req.flash('msg'),
+            type: req.flash('type'),
+            sign: true
+        });
+    })
 })
 
-
-
+routes.get('/logout', isSignIn, (req, res) => {
+    req.logOut();
+    res.redirect('/');
+})
 
 module.exports = routes
