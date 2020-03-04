@@ -37,7 +37,7 @@ createController = (req, res) => {
     if (sign) {
         res.render('create', { sign });
     }else{
-        res.redirect('/users/sign-in')
+        res.redirect('/user/sign-in')
     }
 };
 
