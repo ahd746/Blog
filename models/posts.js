@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-const Posts = mongoose.Schema({
+const PostSchema = mongoose.Schema({
 
     author: {
         type: String,
@@ -33,4 +33,4 @@ const Posts = mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('posts', Posts);
+module.exports = mongoose.model('Post', PostSchema);

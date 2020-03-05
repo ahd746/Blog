@@ -27,7 +27,7 @@ app.use(session({
     saveUninitialized: false,
 }))
 
-//*express flash
+//express flash
 var flash = require('express-flash')
 app.use(flash());
 

@@ -32,15 +32,15 @@ passport.use('local-sign-up', new localStrategy({
 
         if (result) {
             return done(null, false, req.flash('msg', 'Username already exist, choose another one'), req.flash('type', 'danger'));
-        }else{
+        } else {
             theuser = new Users({
                 userName: req.body.userName,
                 password: req.body.password
             })
-            theuser.save((error,result)=>{
-                return done(null,result)
+            theuser.save((error, result) => {
+                return done(null, result)
             });
         }
-        
+
     })
 }));

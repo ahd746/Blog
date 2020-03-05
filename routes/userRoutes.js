@@ -36,7 +36,7 @@ routes.post('/sign-in', [
 }))
 
 
-
+//////////////////////////////////////////////Sign UP//////////////////////////////////////////////////////////////////
 
 
 routes.get('/sign-up', (req, res) => {
@@ -63,13 +63,13 @@ routes.post('/sign-up', [
     next();
 }, passport.authenticate('local-sign-up', {
     session: false,
-    successRedirect: '/user/profile',
+    successRedirect: '/user/sign-in',
     failureRedirect: 'sign-up',
     failureFlash: true
 
 }))
 
-
+///////////////////////////////////////////////////profile////////////////////////////////////////////////////////
 routes.get('/profile', isSignIn, (req, res) => {
     Posts.find({author :req.user.userName}, (error, result) => {
         res.render('profile', {
@@ -80,7 +80,7 @@ routes.get('/profile', isSignIn, (req, res) => {
         });
     })
 })
-
+///////////////////////////////////////////////////log Out////////////////////////////////////////////////////////
 routes.get('/logout', isSignIn, (req, res) => {
     req.logOut();
     res.redirect('/');
