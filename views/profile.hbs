@@ -1,6 +1,11 @@
-<div class="alert mt-2 alert-{{type}}" role="alert">
+<h1 class="my-2">Welcome {{author}}</h1>
+
+{{#if msg}}
+<div class="alert mt-2 alert-success" role="alert">
     <p class="row justify-content-md-center">{{msg}}</p>
 </div>
+{{/if}}
+
 <div>
     <a href="/create">Create new post</a>
 </div>

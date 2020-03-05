@@ -9,9 +9,11 @@
         </div>
         </form>
     </div>
+    {{#if msg}}
     <div class="row justify-content-md-center">
-        <div class="alert mt-5 col-5 alert-{{type}}" role="alert">
+        <div class="alert mt-5 col-5 alert-danger" role="alert">
             <p class="row justify-content-md-center">{{msg}}</p>
         </div>
     </div>
+    {{/if}}
 </div>

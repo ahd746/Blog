@@ -12,13 +12,7 @@ isSign = (req, res) => {
 indexController = (req, res) => {
     Posts.find({}, (error, result) => {
         isSign(req, res);
-        res.render('index', {
-            items: result,
-            msg: req.flash('msg'),
-            type: req.flash('type'),
-            sign
-        });
-
+        res.render('index', { items: result, sign });
     })
 };
 
@@ -36,7 +30,7 @@ createController = (req, res) => {
     isSign(req, res);
     if (sign) {
         res.render('create', { sign });
-    }else{
+    } else {
         res.redirect('/user/sign-in')
     }
 };
@@ -52,7 +46,7 @@ insertController = (req, res) => {
     thepost.save();
     req.flash('msg', 'Post created successfully');
     req.flash('type', 'success');
-    res.redirect('/');
+    res.redirect('/user/profile');
 };
 
 editController = (req, res) => {
@@ -71,16 +65,14 @@ updateController = (req, res) => {
     };
     Posts.updateOne({ _id: req.params.id }, { $set: updatedPost }, (error) => { })
     req.flash('msg', 'Post updated successfully');
-    req.flash('type', 'success');
-    res.redirect('/');
+    res.redirect('/user/profile');
 };
 
 
 deleteController = (req, res) => {
     Posts.deleteOne({ _id: req.params.id }, (error, result) => { });
     req.flash('msg', 'Post deleted successfully');
-    req.flash('type', 'success');
-    res.redirect('/');
+    res.redirect('/user/profile');
 };
 
 module.exports = { indexController, showController, createController, insertController, editController, updateController, deleteController };

@@ -11,9 +11,6 @@
             </li>
         </ul>
         <ul class="navbar-nav  ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/user/sign-up">Sign Up</a>
-            </li>
             {{#if sign}}
             <li class="nav-item">
                 <a class="nav-link" href="/user/profile">Profile</a>
@@ -22,6 +19,9 @@
                 <a class="nav-link" href="/user/logout">Log Out</a>
             </li>
             {{else}}
+            <li class="nav-item">
+                <a class="nav-link" href="/user/sign-up">Sign Up</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/user/sign-in">Sign In</a>
             </li>

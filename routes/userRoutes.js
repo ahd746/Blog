@@ -8,7 +8,7 @@ const passport = require('passport');
 
 
 routes.get('/sign-in', (req, res) => {
-    res.render('sign-in', { msg: req.flash('msg'), type: req.flash('type') })
+    res.render('sign-in', { msg: req.flash('msg') })
 })
 
 routes.post('/sign-in', [
@@ -23,7 +23,6 @@ routes.post('/sign-in', [
             validationMsgs.push(errors.errors[i].msg)
         }
         req.flash('msg', validationMsgs)
-        req.flash('type', 'danger')
         res.redirect('sign-in');
         return;
     }
@@ -46,7 +45,7 @@ routes.get('/sign-up', (req, res) => {
 routes.post('/sign-up', [
     check('userName').not().isEmpty().withMessage('Please enter your user name'),
     check('password').not().isEmpty().withMessage('Please enter your password'),
-    check('password').isLength({ min: 5 }).withMessage('Password is too short')
+    check('password').isLength({ min: 5}).withMessage('password should be 8 character or more')
 
 ], (req, res, next) => {
     const errors = validationResult(req);
@@ -56,13 +55,11 @@ routes.post('/sign-up', [
             validationMsgs.push(errors.errors[i].msg)
         }
         req.flash('msg', validationMsgs)
-        req.flash('type', 'danger')
         res.redirect('sign-up');
         return;
     }
     next();
 }, passport.authenticate('local-sign-up', {
-    session: false,
     successRedirect: '/user/sign-in',
     failureRedirect: 'sign-up',
     failureFlash: true
@@ -71,12 +68,12 @@ routes.post('/sign-up', [
 
 ///////////////////////////////////////////////////profile////////////////////////////////////////////////////////
 routes.get('/profile', isSignIn, (req, res) => {
-    Posts.find({author :req.user.userName}, (error, result) => {
+    Posts.find({ author: req.user.userName }, (error, result) => {
         res.render('profile', {
             items: result,
             msg: req.flash('msg'),
-            type: req.flash('type'),
-            sign: true
+            sign: true,
+            author: req.user.userName
         });
     })
 })
